@@ -1,0 +1,29 @@
+body{
+    background-image: url(https://images2.alphacoders.com/136/thumb-1920-1362447.jpeg);
+    background-repeat: no-repeat;
+}
+
+
+h1 {
+    font-size: 22px;
+    color: red;
+    
+}
+
+div {
+    margin: 100px;
+    border: medium solid rgb(63, 0, 0);
+    box-shadow: 4px 4px 10px 2px rgb(119, 4, 4),
+    2px 2px 4px 2px rgb(0, 0, 0) inset;
+    background-color: brown;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:1.1% 1.5%;
+    text-align: center;
+    width:30%;
+    border-radius: 20px;
+    position:sticky;
+    top: 50px;
+    left:60%;
+}
