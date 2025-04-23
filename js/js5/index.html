@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Gráfico de Barras</h1>
+    <div class="form">
+        <div class="alturas">
+            Informe a altura das barras:
+            <input type="text" id="b1"  placeholder="barra 1" required>
+            <input type="text" id="b2"  placeholder="barra 2" required>
+            <input type="text" id="b3"  placeholder="barra 3" required>
+            <input type="text" id="b4"  placeholder="barra 4" required>
+            <input type="text" id="b5"  placeholder="barra 5" required>
+
+        </div>
+
+        <div class="largura">
+            Informe a largura das barras:
+            <input type="text" id="larg" required>
+
+        </div>
+    </div>
+        <button onclick="draw()">
+            Desenhar o gráfico
+        </button>
+
+
+        <div class = "barras">
+            <canvas id="grafico"  width="500" height="500"> </canvas>
+
+        </div>
+    
+</body>
+<script src="script.js"></script>
+<style>
+
+    
+    input{
+        width: 50px;
+    }
+
+    .form{
+        display:flex;
+        flex-direction: column;
+        margin:  20px 0 20px 0;
+    }
+    .grafico{
+
+        
+    }
+</style>
+</html>
