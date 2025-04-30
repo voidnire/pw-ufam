@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-bt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS6 😁</title>
+</head>
+<body>
+    <p onmouseover="this.style.background='black'; this.style.color='white'">
+       (●ˇ∀ˇ●)
+    </p>
+</body>
+
+<style>
+    body {
+        height: 200px; background: rgb(32, 2, 46);
+    }
+    .dot {
+        height: 8px; width: 8px; border-radius: 4px;
+        background: rgb(173, 226, 215); 
+        position: absolute;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    const trail = []; 
+    document.addEventListener("mousemove", function(event) {
+        let dot = document.createElement("div");
+        dot.className = "dot";
+        dot.style.left = (event.pageX - 4) + "px";
+        dot.style.top = (event.pageY - 4) + "px";
+        document.body.appendChild(dot);
+        trail.push(dot);
+
+
+        if (trail.length > 8) {
+                const remove = trail.shift();
+                document.body.removeChild(remove);
+        }
+    });
+</script>
+</html>
