@@ -1,6 +1,7 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
+require("dotenv").config();
 
 const diretorio = process.argv[2] || "./"; // diretório atual se nenhum for fornecido
 
@@ -48,7 +49,10 @@ const server = http.createServer((req, res) => {
   });
 });
 
-const PORT = 3001;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+
+const PORT = process.env.PORT ?? 3001;
+
 server
   .listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
