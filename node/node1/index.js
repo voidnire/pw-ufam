@@ -1,57 +1,71 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
-require("dotenv").config();
+
+//modules
+const dotenv = require("dotenv");
+
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+const util = require("./funcs");
+
+//config
+
+const PORT = process.env.PORT ?? 3001;
 
 const diretorio = process.argv[2] || "./"; // diretório atual se nenhum for fornecido
 
+// Server Logic
 const server = http.createServer((req, res) => {
+  // Servir arquivos quando acessados pelos links
+  if (req.url !== "/") {
+    const filePath = path.join(diretorio, req.url);
+
+    fs.readFile(filePath, "utf8", (err, data) => {
+      if (err) {
+        res.writeHead(404, { "Content-Type": "text/html;charset=utf-8" });
+        res.end(`
+                <h1>Arquivo não encontrado</h1>
+                ${util.createBackLink()}
+            `);
+        return;
+      }
+
+      res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
+      res.end(`
+        ${util.createBackLink()}
+            <h1>Conteúdo do arquivo: ${req.url}</h1>
+            <pre>${data}</pre>
+            
+        `);
+    });
+
+    return;
+  }
+
+  // Listagem de arquivos
   fs.readdir(diretorio, (err, files) => {
     if (err) {
       res.writeHead(500, { "Content-Type": "text/plain" });
-      res.end(`Erro ao ler o diretório: ${err.message}`);
+      res.end(`Erro ao ler o arq: ${err.message}`);
       return;
     }
 
-    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-    res.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Conteúdo do Diretório</title>
-            <style>
-                body { font-family: Arial, sans-serif; margin: 20px; }
-                h1 { color: #333; }
-                ul { list-style-type: none; padding: 0; }
-                li { padding: 5px; }
-                li:nth-child(odd) { background-color: #f5f5f5; }
-            </style>
-        </head>
-        <body>
-            <h1>Conteúdo do diretório: ${diretorio}</h1>
-            <ul>
-    `);
+    res.writeHead(200, { "Content-Type": "text/html" });
 
-    // Lista cada arquivo/diretório
+    // Gerar links para cada arquivo
     files.forEach((file) => {
       const filePath = path.join(diretorio, file);
       const stats = fs.statSync(filePath);
-      const icon = stats.isDirectory() ? "📁" : "📄";
 
-      res.write(`<li>${icon} ${file}</li>`);
+      // Mostrar apenas arquivos, não diretórios
+      if (!stats.isDirectory()) {
+        res.write(util.createLink(file));
+      }
     });
 
-    res.end(`
-            </ul>
-        </body>
-        </html>
-    `);
+    res.end();
   });
 });
-
-const DB_PASSWORD = process.env.DB_PASSWORD;
-
-const PORT = process.env.PORT ?? 3001;
 
 server
   .listen(PORT, () => {
