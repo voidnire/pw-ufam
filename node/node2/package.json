@@ -1,0 +1,16 @@
+{
+  "name": "node2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "NODE_ENV=development nodemon index.js"
+  },
+  "author": "erin dante",
+  "license": "ISC",
+  "keywords": [],
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
