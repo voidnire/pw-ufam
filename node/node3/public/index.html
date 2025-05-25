@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gerador de Lorem Ipsum</title>
+  </head>
+  <body>
+    <h1>Gerador de Lorem Ipsum</h1>
+    <label for="count">Número de parágrafos:</label>
+    <input type="number" id="count" min="1" value="3" />
+    <button id="generateBtn">Gerar</button>
+    <div id="result"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Corpo da página */
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9f9f9;
+    color: #333;
+    padding: 30px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Título */
+  h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #222;
+  }
+
+  /* Label e input */
+  label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  input[type="number"] {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 1rem;
+    border: 1.5px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+  }
+
+  input[type="number"]:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+
+  /* Botão */
+  button {
+    display: block;
+    width: 100%;
+    background-color: #b84a4a;
+    color: white;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.25s ease-in-out;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Resultado */
+  #result {
+    margin-top: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgb(0 0 0 / 0.1);
+  }
+
+  #result p {
+    margin-bottom: 1.1em;
+    line-height: 1.5;
+    color: #444;
+  }
+</style>
