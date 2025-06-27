@@ -1,0 +1,153 @@
+<html lang='pt-BR'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Minha Loja Virtual - Produtos</title>
+    <link
+      href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css'
+      rel='stylesheet'
+    />
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+      }
+      .navbar-brand {
+        font-weight: bold;
+      }
+      .table-container {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-top: 20px;
+      }
+      .btn-options {
+        display: flex;
+        gap: 5px;
+      }
+      .disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
+      <div class='container'>
+        <a class='navbar-brand' href='#'>Minha Loja Virtual</a>
+        <div class='navbar-nav'>
+          <a class='nav-link active' href='#'>Produtos</a>
+          <a class='nav-link' href='#'>Features</a>
+          <a class='nav-link' href='#'>Pricing</a>
+          <a class='nav-link disabled' href='#'>Disabled</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class='container mt-4'>
+      <div class='d-flex justify-content-between align-items-center mb-4'>
+        <h2>Listagem de Produtos</h2>
+        <button
+          class='btn btn-primary'
+          data-bs-toggle='modal'
+          data-bs-target='#addProductModal'
+        >
+          Adicionar Produto
+        </button>
+      </div>
+
+      <div class='table-container'>
+        <table class='table table-hover'>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Preço</th>
+              <th>Opções</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each products}}
+              <tr>
+                <td>{{this.name}}</td>
+                <td>R$ {{this.price}}</td>
+                <td>
+                  <div class='btn-options'>
+                    <button
+                      class='btn btn-sm btn-warning edit-btn'
+                      data-id='{{this.id}}'
+                    >✏️</button>
+                    <button
+                      class='btn btn-sm btn-danger delete-btn'
+                      data-id='{{this.id}}'
+                    >🗑️</button>
+                  </div>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Modal para Adicionar/Editar Produto -->
+    <div class='modal fade' id='productModal' tabindex='-1' aria-hidden='true'>
+      <div class='modal-dialog'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h5 class='modal-title' id='modalTitle'>Adicionar Novo Produto</h5>
+            <button
+              type='button'
+              class='btn-close'
+              data-bs-dismiss='modal'
+              aria-label='Close'
+            ></button>
+          </div>
+          <div class='modal-body'>
+            <form id='productForm'>
+              <input type='hidden' id='productId' />
+              <div class='mb-3'>
+                <label for='productName' class='form-label'>Nome do Produto</label>
+                <input
+                  type='text'
+                  class='form-control'
+                  id='productName'
+                  required
+                />
+              </div>
+              <div class='mb-3'>
+                <label for='productPrice' class='form-label'>Preço (R$)</label>
+                <input
+                  type='number'
+                  step='0.01'
+                  class='form-control'
+                  id='productPrice'
+                  required
+                />
+              </div>
+            </form>
+          </div>
+          <div class='modal-footer'>
+            <button
+              type='button'
+              class='btn btn-secondary'
+              data-bs-dismiss='modal'
+            >Cancelar</button>
+            <button
+              type='button'
+              class='btn btn-primary'
+              id='saveProduct'
+            >Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js'
+    ></script>
+    <script src='/src/views/produtos.js'>
+
+    </script>
+  </body>
+</html>

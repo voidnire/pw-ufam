@@ -1,0 +1,32 @@
+@mixin borda($wth) {
+  border-top: dotted $wth black;
+  border-bottom: solid $wth black;
+}
+#menu a {
+  color: #111;
+  @include borda(2px);
+}
+.post a {
+  @include borda(1px);
+}
+
+$color: #4d926f;
+$the-border: 1px;
+#header {
+  border-left: $the-border;
+  border-right: $the-border * 2;
+  color: $color;
+  .navigation {
+    font-size: 12px;
+  }
+  .logo {
+    width: 300px;
+  }
+}
+
+body h1 {
+  color: #4d926f !important;
+}
+h2 {
+  color: $color;
+}
