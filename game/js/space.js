@@ -1,15 +1,17 @@
-import { TAMX, TAMY } from "./config.js"
+import { TAMX, TAMY } from "./config.js";
 
 class Space {
   constructor() {
-    this.element = document.getElementById("space")
-    this.element.style.width = "100vw"//`${TAMX}px`
-    this.element.style.height = "100vh"//`${TAMY}px`
-    this.element.style.backgroundPositionY = "0px"
+    this.element = document.getElementById("space");
+    this.element.style.width = "100vw"; //`${TAMX}px`
+    this.element.style.height = "85vh"; //`${TAMY}px`
+    this.element.style.backgroundPositionY = "0px";
   }
   move() {
-    this.element.style.backgroundPositionY = `${parseInt(this.element.style.backgroundPositionY) + 1}px`
+    this.element.style.backgroundPositionY = `${
+      parseInt(this.element.style.backgroundPositionY) + 1
+    }px`;
   }
 }
 
-export const space = new Space()
+export const space = new Space();
