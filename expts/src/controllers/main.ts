@@ -7,7 +7,7 @@ import { LoginDto } from '../types/user'; // tipagem para o DTO
 import { PrismaClient ,User, GameSession} from '@prisma/client'; // para buscar o usuário após autenticar
 import { checkAuth } from '../services/auth'; // adicione este import
 
-import { getUserByEmail ,saveGameSession} from '../services/user';
+import { getUserByEmail ,saveGameSession, getRanking} from '../services/user';
 
 const index = (req: Request, res: Response) => {
   res.render('index');
@@ -199,16 +199,35 @@ const userAutenticado = function (req: Request, res: Response) {
   }
 };
 
+export const getLoggedUserId = (req: Request, res: Response) => {
+  const userId = req.cookies?.uid;
+  if (!userId) {
+    return res.status(401).send('Usuário não autenticado');
+  }
+  res.status(200).send({ userId });
+};
+
+// GAME SESSION
+
 export const userScore = async (req: Request, res: Response) => {
-  const { score } = req.body;
+  const score = req.params.score;
   const userId = req.session.uid;
-  if (!userId) return res.status(401).send('Usuário não autenticado');
+  if (!userId){
+     res.status(401).send('Usuário não autenticado');
+     return;
+  } 
   try {
-    await saveGameSession(userId, score)
+    await saveGameSession(score,userId) 
     res.status(200).send('Score salvo!');
   } catch (err) {
     res.status(500).send('Erro ao salvar score');
   }
+};
+
+
+export const ranking = async (req: Request, res: Response) => {
+  const ranking = await getRanking();
+  res.render('ranking', { ranking });
 };
 
 export default {
@@ -228,4 +247,6 @@ export default {
   login,
   logout,
   game,
+  userScore,
+  ranking
 };

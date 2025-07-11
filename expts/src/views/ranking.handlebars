@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Ranking dos 10 Melhores Jogadores</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Posição</th>
+        <th>Nome</th>
+        <th>Pontuação</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each ranking}}
+        <tr>
+            <td>{{this.position}}</td>
+          <td>{{this.name}}</td>
+          <td>{{this.score}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+<style>
+  .container { max-width: 600px; margin: 30px auto; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 10px; border: 1px solid #ddd; text-align: center; }
+  th { background: #f2f2f2; }
+</style>

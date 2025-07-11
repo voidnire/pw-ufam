@@ -214,14 +214,21 @@ function clearEnemies() {
   enemyUFOs.length = 0;
 }
 
+function saveUserScore(score){
+  fetch(`/save-user-score/${score}`, {
+    method: 'POST',
+    //headers: { 'Content-Type': 'application/json' },
+  });
+
+}
 
 function endGame() {
-
-
   gamePaused = true;     
   const modal = document.getElementById("gameOverModal");
   modal.style.display = "flex"
-  
+
+  console.log("Game Over! User score: ", score.points)
+  saveUserScore(score.points) 
 
   const restartBtn = document.getElementById("restartBtn");
 

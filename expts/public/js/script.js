@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 async function createMajor(newMajor) {
-  console.log('oi gata');
+  console.log('criando major ig');
   try {
     const majorToSend = { ...newMajor };
     delete majorToSend.id; // Remove o campo 'id'

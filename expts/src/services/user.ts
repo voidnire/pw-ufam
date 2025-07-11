@@ -97,14 +97,46 @@ export const getUserByEmail = async (email: string): Promise<User | null> => {
 };
 
 export const saveGameSession = async (
-  userId: string,
-  score: number
+  score: string,userId:string
 ): Promise<GameSession> => {
+
   if (!userId) throw new Error('Usuário não autenticado');
+  
+  const numericScore = parseInt(score, 10);
+
   return await prisma.gameSession.create({
     data: {
       user_id: userId,
-      score: score,
+      score: numericScore,//TRANFORMA PRA NUMEOR
     },
   });
 };
+
+export const getRanking = async () => {
+  // Busca a maior pontuação de cada usuário
+  const sessions = await prisma.gameSession.findMany({
+    orderBy: [{ score: 'desc' }],
+    include: { user: true },
+  });
+
+  // Agrupa por usuário e pega a maior pontuação
+  const rankingMap = new Map();
+  sessions.forEach((session) => {
+    const existing = rankingMap.get(session.user_id);
+    if (!existing || session.score > existing.score) {
+      rankingMap.set(session.user_id, {
+        name: session.user.name,
+        score: session.score,
+      });
+    }
+  })
+  return Array.from(rankingMap.values())
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 10)
+    .map((entry, index) => ({
+    position: index + 1,
+    ...entry,
+  }))
+
+
+}

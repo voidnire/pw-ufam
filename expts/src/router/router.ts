@@ -40,6 +40,9 @@ router.get('/login', mainController.login);
 router.post('/login', mainController.login);
 router.get('/logout', mainController.logout);
 router.post('/user/delete/:id', userController.remove);
+// game
+router.post('/save-user-score/:score', mainController.userScore);
+router.get('/ranking', mainController.ranking);
 
 // rotas de UUID
 router.get('/uuid', mainController.uuid);
