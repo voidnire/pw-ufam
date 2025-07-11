@@ -1,10 +1,11 @@
-import { PrismaClient, User } from '@prisma/client';
+import { PrismaClient, User, GameSession } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import {
   UserCreateDto,
   LoginDto,
   UpdateUserDto,
   CreatedUserDto,
+  GameSessionDto
 } from '../types/user';
 
 const prisma = new PrismaClient();
@@ -92,5 +93,18 @@ export const getUserById = async (id: string): Promise<User | null> => {
 export const getUserByEmail = async (email: string): Promise<User | null> => {
   return await prisma.user.findUnique({
     where: { email },
+  });
+};
+
+export const saveGameSession = async (
+  userId: string,
+  score: number
+): Promise<GameSession> => {
+  if (!userId) throw new Error('Usuário não autenticado');
+  return await prisma.gameSession.create({
+    data: {
+      user_id: userId,
+      score: score,
+    },
   });
 };

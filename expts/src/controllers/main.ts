@@ -4,9 +4,10 @@ import { title } from 'process';
 import { v4 as uuidv4 } from 'uuid';
 import { getAllMajors } from '../services/major';
 import { LoginDto } from '../types/user'; // tipagem para o DTO
-import { PrismaClient } from '@prisma/client'; // para buscar o usuário após autenticar
+import { PrismaClient ,User, GameSession} from '@prisma/client'; // para buscar o usuário após autenticar
 import { checkAuth } from '../services/auth'; // adicione este import
-import { getUserByEmail } from '../services/user';
+
+import { getUserByEmail ,saveGameSession} from '../services/user';
 
 const index = (req: Request, res: Response) => {
   res.render('index');
@@ -195,6 +196,18 @@ const userAutenticado = function (req: Request, res: Response) {
     res.send('Você NUNCA passou por aqui!');
   } else {
     res.send('Você JÁ passou por aqui');
+  }
+};
+
+export const userScore = async (req: Request, res: Response) => {
+  const { score } = req.body;
+  const userId = req.session.uid;
+  if (!userId) return res.status(401).send('Usuário não autenticado');
+  try {
+    await saveGameSession(userId, score)
+    res.status(200).send('Score salvo!');
+  } catch (err) {
+    res.status(500).send('Erro ao salvar score');
   }
 };
 

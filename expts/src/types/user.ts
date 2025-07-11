@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { User, GameSession  } from '@prisma/client';
 
 export type UserCreateDto = Pick<User, 'name' | 'email' | 'password'>;
 
@@ -10,4 +10,9 @@ export type UpdateUserDto = Partial<
 export type CreatedUserDto = Pick<
   User,
   'name' | 'email' | 'password' | 'majorId'
+>;
+
+export type GameSessionDto = Pick<
+  GameSession,
+  'user_id' | 'score'
 >;
