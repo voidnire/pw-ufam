@@ -11,15 +11,12 @@ router.get('/', mainController.index);
 
 // rotas
 router.get('/lorem/:num', mainController.lorem);
-router.get('/bemvindo/:nome', mainController.bemvindo);
 router.get('/hb1', mainController.hb1);
 router.get('/hb2', mainController.hb2);
 router.get('/hb3', mainController.hb3);
 router.get('/hb4', mainController.hb4);
-//router.get('/hb5', mainController.hb5);
 router.get('/about', mainController.sobre);
 router.get('/sobre', mainController.sobre);
-router.get('/produto', requireAuth, mainController.produto);
 
 // rotas de MajorController
 router.get('/major', majorController.index);
@@ -39,10 +36,10 @@ router.get('/user', userController.index);
 router.get('/login', mainController.login);
 router.post('/login', mainController.login);
 router.get('/logout', mainController.logout);
-router.post('/user/delete/:id', userController.remove);
+router.post('/user/delete/:id',userController.remove);
 // game
 router.post('/save-user-score/:score', mainController.userScore);
-router.get('/ranking', mainController.ranking);
+router.get('/ranking',requireAuth, mainController.ranking);
 
 // rotas de UUID
 router.get('/uuid', mainController.uuid);

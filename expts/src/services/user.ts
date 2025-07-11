@@ -137,6 +137,12 @@ export const getRanking = async () => {
     position: index + 1,
     ...entry,
   }))
-
-
 }
+
+
+export const removeGameSessions = async (id:string) => {
+  await prisma.gameSession.deleteMany({
+    where: { user_id: id },
+  });
+}
+

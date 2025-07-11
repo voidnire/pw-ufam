@@ -4,7 +4,6 @@ import { title } from 'process';
 import { v4 as uuidv4 } from 'uuid';
 import { getAllMajors } from '../services/major';
 import { LoginDto } from '../types/user'; // tipagem para o DTO
-import { PrismaClient ,User, GameSession} from '@prisma/client'; // para buscar o usuário após autenticar
 import { checkAuth } from '../services/auth'; // adicione este import
 
 import { getUserByEmail ,saveGameSession, getRanking} from '../services/user';
@@ -13,15 +12,8 @@ const index = (req: Request, res: Response) => {
   res.render('index');
 };
 
-const bemvindo = (req: Request, res: Response) => {
-  res.end('Welcome to Web academy!');
-};
 
-const produto = (req: Request, res: Response) => {
-  res.render('produto', {
-    layout: false,
-  });
-};
+
 
 const sobre = (req: Request, res: Response) => {
   res.render('sobre', {
@@ -233,13 +225,11 @@ export const ranking = async (req: Request, res: Response) => {
 export default {
   index,
   sobre,
-  bemvindo,
   lorem,
   hb1,
   hb2,
   hb3,
   hb4,
-  produto,
   cadastro,
   createCookie,
   clearCookie,

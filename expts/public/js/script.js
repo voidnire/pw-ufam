@@ -47,6 +47,13 @@ function confirmDeletar(id, name) {
   document.getElementById('modal').style.display = 'flex';
 }
 
+function deletarUser(name) {
+  console.log("clicou em deletar userr")
+  document.getElementById('confirmationMessage').textContent =
+    `Deseja mesmo apagar o usuário ${name}?`;
+  document.getElementById('modal').style.display = 'flex';
+}
+
 function closeModal() {
   document.getElementById('modal').style.display = 'none';
   document.getElementById('modal-criar').style.display = 'none';
@@ -113,7 +120,7 @@ function redirect(page) {
   // window.location.href = `/paginas/${page}`;
 }
 
-/* ----------------------------- CADASTRO ----------------------------- */
+/* ----------------------------- CADASTRO -----------------------------
 document.addEventListener('DOMContentLoaded', function () {
   axios
     .get('/major')
@@ -134,6 +141,6 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('major').innerHTML =
         '<option value="" selected disabled>Erro ao carregar cursos</option>';
     });
-});
+}); */
 
 /* ----------------------------- CADASTRO ----------------------------- */

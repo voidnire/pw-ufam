@@ -5,7 +5,7 @@ import {
   getAllUsers,
   updateUser,
   getUserById,
-  getUserByEmail,
+  getUserByEmail,removeGameSessions
 } from '../services/user';
 import { userSchema } from '../types/schema';
 
@@ -131,6 +131,12 @@ const update = async (req: Request, res: Response) => {
 
 const remove = async (req: Request, res: Response) => {
   const { id } = req.params;
+  console.log("Removendo as game sessions do usuário.", id)
+
+  removeGameSessions(id)
+  
+  console.log("Removendo o usuário de id:", id)
+  
   try {
     await removeUser(id);
     res.redirect('/user');

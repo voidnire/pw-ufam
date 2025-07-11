@@ -7,7 +7,7 @@ export function accessLogMiddleware(logFormat: 'simples' | 'completo') {
     const logFolder = process.env.LOGS_PATH || 'logs';
     const logFile = path.join(logFolder, 'access.log');
 
-    console.log('Função iniciada.');
+    //console.log('Função de log iniciada.');
 
     try {
       if (!fs.existsSync(logFolder)) {
