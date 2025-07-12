@@ -5,7 +5,7 @@ import {
   LoginDto,
   UpdateUserDto,
   CreatedUserDto,
-  GameSessionDto
+  GameSessionDto,
 } from '../types/user';
 
 const prisma = new PrismaClient();
@@ -97,17 +97,17 @@ export const getUserByEmail = async (email: string): Promise<User | null> => {
 };
 
 export const saveGameSession = async (
-  score: string,userId:string
+  score: string,
+  userId: string,
 ): Promise<GameSession> => {
-
   if (!userId) throw new Error('Usuário não autenticado');
-  
+
   const numericScore = parseInt(score, 10);
 
   return await prisma.gameSession.create({
     data: {
       user_id: userId,
-      score: numericScore,//TRANFORMA PRA NUMEOR
+      score: numericScore, //TRANFORMA PRA NUMEOR
     },
   });
 };
@@ -129,20 +129,18 @@ export const getRanking = async () => {
         score: session.score,
       });
     }
-  })
+  });
   return Array.from(rankingMap.values())
     .sort((a, b) => b.score - a.score)
     .slice(0, 10)
     .map((entry, index) => ({
-    position: index + 1,
-    ...entry,
-  }))
-}
+      position: index + 1,
+      ...entry,
+    }));
+};
 
-
-export const removeGameSessions = async (id:string) => {
+export const removeGameSessions = async (id: string) => {
   await prisma.gameSession.deleteMany({
     where: { user_id: id },
   });
-}
-
+};

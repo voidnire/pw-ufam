@@ -1,0 +1,53 @@
+<div class='container mt-5'>
+  <h2>Alterar Senha</h2>
+
+  {{#if error}}
+    <div class='alert alert-danger'>{{error}}</div>
+  {{/if}}
+
+  {{#if success}}
+    <div class='alert alert-success'>{{success}}</div>
+  {{/if}}
+
+  <form action='/user/changepassword' method='POST'>
+    <div class='mb-3'>
+      <label for='currentPassword' class='form-label'>Senha atual</label>
+      <input
+        type='password'
+        class='form-control'
+        id='currentPassword'
+        name='currentPassword'
+        required
+      />
+    </div>
+
+    <div class='mb-3'>
+      <label for='newPassword' class='form-label'>Nova senha</label>
+      <input
+        type='password'
+        class='form-control'
+        id='newPassword'
+        name='newPassword'
+        required
+      />
+    </div>
+
+    <div class='mb-3'>
+      <label for='repeatNewPassword' class='form-label'>Repetir nova senha</label>
+      <input
+        type='password'
+        class='form-control'
+        id='repeatNewPassword'
+        name='repeatNewPassword'
+        required
+      />
+    </div>
+
+    <button type='submit' class='btn btn-primary'>Alterar Senha</button>
+  </form>
+
+  <button
+    onclick='history.back()'
+    class='btn btn-secondary mt-3'
+  >Voltar</button>
+</div>

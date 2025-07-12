@@ -2,3 +2,4 @@
 logs/
 /src/generated/prisma
 build/
+.env

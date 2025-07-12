@@ -1,8 +1,358 @@
 <div>
-  <div style='margin:20px 10px ;display: flex; justify-content:center;'>
+  <div style='margin-top: 10px ;display: flex; justify-content:center;'>
     <h1>Bem vindo ao Trabalho Final!</h1>
   </div>
-  <div style='padding:20px;'>
+  <div
+    style='padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;'
+  >
+
+    <div class='card'>
+      <div class='mac-header'>
+        <span class='red'></span>
+        <span class='yellow'></span>
+        <span class='green'></span>
+      </div>
+      <span class='card-title'>Mensagem de Erin Dante V.</span>
+      <p class='card-description'>
+        Aprendi mais de web esse período do que na minha vida inteira!</p>
+      <div>
+        <span class='card-tag'>PETZONE</span>
+        <span class='card-tag'>WEB DESIGNER</span>
+        <span class='card-tag'>FRONT END DEV</span>
+        <span class='card-tag'>UI UX DEV</span>
+      </div>
+      <div class='code-editor'>
+        <pre><code>&lt;h1&gt; Hello Prof. David! &lt;/h1&gt;</code></pre>
+        <pre><code>&lt;p&gt; Sei que tenho uma quantidade absurda de faltas, e
+            já era pra eu ter falado com você sobre. falei com a Ana do apoio
+            pedagógico e expliquei a situação, se quiser confirmar com
+            ela.&lt;/p&gt;</code></pre>
+        <pre><code>&lt;p&gt; Faltei muito pois estava 100% vidrado no PetZone.
+            Acabei tendo que fazer o trabalho do time do Back-End também, pois 2
+            integrantes do grupo não fizeram quase nada até as últimas duas
+            semanas de entrega. Gostaria que considerasse não me reprovar por
+            falta. Desde já obrigado!&lt;/p&gt;</code></pre>
+
+      </div>
+    </div>
+
+    <div class='buttons'>
+      <a href='/game'>
+        <button class='btn'><span></span><p
+            data-start='good luck!'
+            data-text='start!'
+            data-title='new game'
+          ></p></button>
+      </a>
+    </div>
 
   </div>
 </div>
+
+<style>
+  .card {
+    max-width: 700px;
+    height: 350px;
+    padding: 20px;
+    border: 1px solid #0d1117;
+    border-radius: 10px;
+    background-color: #000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
+    position: relative;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      'Open Sans',
+      'Helvetica Neue',
+      sans-serif;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .mac-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+
+  .mac-header span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .mac-header .red {
+    background-color: #ff5f57;
+  }
+
+  .mac-header .yellow {
+    background-color: #ffbd2e;
+  }
+
+  .mac-header .green {
+    background-color: #28c941;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 10px;
+    color: #e6e6ef;
+  }
+
+  .card-description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+  }
+
+  .card .card-tag {
+    display: inline-block;
+    font-size: 10px;
+    border-radius: 5px;
+    background-color: #0d1117;
+    padding: 4px;
+    max-width: 200px;
+    margin-block-end: 12px;
+    color: #dcdcdc;
+  }
+  .code-editor {
+    background-color: #0d1117;
+    color: #dcdcdc;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      'Open Sans',
+      'Helvetica Neue',
+      monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    border-radius: 5px;
+    padding: 15px;
+    overflow: auto;
+    height: fit-content;
+    border: 1px solid #333;
+  }
+
+  .code-editor::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .code-editor::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+  }
+
+  .code-editor pre code {
+    white-space: pre-wrap;
+    display: block;
+  }
+
+  /*bg*/
+  /*txt*/
+  /*success*/
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    top: 20px;
+    left: 20px;
+  }
+
+  .buttons button {
+    width: 150px;
+    height: 50px;
+    background-color: white;
+    margin: 20px;
+    color: #568fa6;
+    position: relative;
+    overflow: hidden;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+  }
+
+  .buttons button:before,
+  .buttons button:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #44d8a4;
+    transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+  }
+
+  .buttons button:before {
+    right: 0;
+    top: 0;
+    transition: all 0.5s cubic-bezier(0.35, 0.1, 0.25, 1);
+  }
+
+  .buttons button:after {
+    left: 0;
+    bottom: 0;
+  }
+
+  .buttons button span {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+
+  .buttons button span:before,
+  .buttons button span:after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 0;
+    background-color: #44d8a4;
+    transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+  }
+
+  .buttons button span:before {
+    right: 0;
+    top: 0;
+    transition: all 0.5s cubic-bezier(0.35, 0.1, 0.25, 1);
+  }
+
+  .buttons button span:after {
+    left: 0;
+    bottom: 0;
+  }
+
+  .buttons button p {
+    padding: 0;
+    margin: 0;
+    transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .buttons button p:before,
+  .buttons button p:after {
+    position: absolute;
+    width: 100%;
+    transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+    z-index: 1;
+    left: 0;
+  }
+
+  .buttons button p:before {
+    content: attr(data-title);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .buttons button p:after {
+    content: attr(data-text);
+    top: 150%;
+    color: #44d8a4;
+  }
+
+  .buttons button:hover:before,
+  .buttons button:hover:after {
+    width: 100%;
+  }
+
+  .buttons button:hover span {
+    z-index: 1;
+  }
+
+  .buttons button:hover span:before,
+  .buttons button:hover span:after {
+    height: 100%;
+  }
+
+  .buttons button:hover p:before {
+    top: -50%;
+    transform: rotate(5deg);
+  }
+
+  .buttons button:hover p:after {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .buttons button.start {
+    background-color: #44d8a4;
+    box-shadow: 0px 5px 10px -10px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+  }
+
+  .buttons button.start p:before {
+    top: -50%;
+    transform: rotate(5deg);
+  }
+
+  .buttons button.start p:after {
+    color: white;
+    transition: all 0s ease;
+    content: attr(data-start);
+    top: 50%;
+    transform: translateY(-50%);
+    animation: start 0.3s ease;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes start {
+    from {
+      top: -50%;
+    }
+  }
+
+  .buttons button.start:hover:before,
+  .buttons button.start:hover:after {
+    display: none;
+  }
+
+  .buttons button.start:hover span {
+    display: none;
+  }
+
+  .buttons button:active {
+    outline: none;
+    border: none;
+  }
+
+  .buttons button:focus {
+    outline: 0;
+  }
+</style>

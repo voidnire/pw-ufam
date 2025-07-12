@@ -10,49 +10,47 @@
         <th>Nome</th>
         <th>Curso</th>
         <th>Email</th>
-        <th>Senha</th>
+        <!--<th>Senha</th>-->
         <th>Opções</th>
       </tr>
     </thead>
     <tbody>
 
-      {{#each users}}
-        <div id='modal'>
-          <div id='modalContent'>
-            <div class='modal-header'>
-              Confirmar Deleção
-            </div>
-            <p id='confirmationMessage'></p>
-            <div class='modal-buttons'>
-              <button onclick='closeModal()'>Fechar</button>
-              <form action='/user/delete/{{user.id}}' method='POST'>
-                <button
-                  id='btn-confirmar'
-                  type='submit'
-                  class='btn-confirmar'
-                >Sim, apagar usuário</button>
-              </form>
+      <div id='modal'>
+        <div id='modalContent'>
+          <div class='modal-header'>
+            Confirmar Deleção
+          </div>
+          <p id='confirmationMessage'></p>
+          <div class='modal-buttons'>
+            <button onclick='closeModal()'>Fechar</button>
+            <form id='deleteForm' method='POST'>
+              <button
+                id='btn-confirmar'
+                type='submit'
+                class='btn-confirmar'
+              >Sim, apagar usuário</button>
+            </form>
 
-            </div>
           </div>
         </div>
+      </div>
+
+      {{#each users}}
 
         <tr>
-          <!---->
 
           <td>{{user.name}}</td>
           <td>{{major.name}}</td>
           <td>{{user.email}}</td>
-          <td>{{user.password}}</td>
+          <!--
+<td>{{user.password}}</td>-->
           <td>
 
-            <i class='fas fa-pencil-alt icon'></i>
-            <i class='fas fa-eye icon'></i>
-
-              <i
-                class='fas fa-trash-alt icon'
-                onclick='deletarUser("{{user.name}}")'
-              ></i>
+            <i
+              class='fas fa-trash-alt icon'
+              onclick='deletarUser("{{user.name}}","{{user.id}}")'
+            ></i>
 
           </td>
         </tr>

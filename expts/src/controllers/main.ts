@@ -5,15 +5,18 @@ import { v4 as uuidv4 } from 'uuid';
 import { getAllMajors } from '../services/major';
 import { LoginDto } from '../types/user'; // tipagem para o DTO
 import { checkAuth } from '../services/auth'; // adicione este import
+import bcrypt from 'bcryptjs';
 
-import { getUserByEmail ,saveGameSession, getRanking} from '../services/user';
+import {
+  getUserByEmail,
+  saveGameSession,
+  getRanking,
+  getUserById,
+} from '../services/user';
 
 const index = (req: Request, res: Response) => {
   res.render('index');
 };
-
-
-
 
 const sobre = (req: Request, res: Response) => {
   res.render('sobre', {
@@ -204,22 +207,50 @@ export const getLoggedUserId = (req: Request, res: Response) => {
 export const userScore = async (req: Request, res: Response) => {
   const score = req.params.score;
   const userId = req.session.uid;
-  if (!userId){
-     res.status(401).send('Usuário não autenticado');
-     return;
-  } 
+  if (!userId) {
+    res.status(401).send('Usuário não autenticado');
+    return;
+  }
   try {
-    await saveGameSession(score,userId) 
+    await saveGameSession(score, userId);
     res.status(200).send('Score salvo!');
   } catch (err) {
     res.status(500).send('Erro ao salvar score');
   }
 };
 
-
 export const ranking = async (req: Request, res: Response) => {
   const ranking = await getRanking();
   res.render('ranking', { ranking });
+};
+
+export const updateUser = async (req: Request, res: Response) => {
+  const userId = req.cookies?.uid;
+  const user = await getUserById(userId);
+  if (!user) {
+    res.status(404).send('User not found');
+    return;
+  }
+  const majors = await getAllMajors();
+
+  if (req.method === 'GET') {
+    res.render('dadosuser', { user, majors });
+    return;
+  }
+};
+
+export const renderChangePassword = async (req: Request, res: Response) => {
+  const userId = req.cookies?.uid;
+  const user = await getUserById(userId);
+  if (!user) {
+    res.status(404).send('User not found');
+    return;
+  }
+
+  if (req.method === 'GET') {
+    res.render('alterarsenha', { user });
+    return;
+  }
 };
 
 export default {
@@ -233,10 +264,12 @@ export default {
   cadastro,
   createCookie,
   clearCookie,
+  renderChangePassword,
   uuid,
   login,
   logout,
   game,
   userScore,
-  ranking
+  ranking,
+  updateUser,
 };

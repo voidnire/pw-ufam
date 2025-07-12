@@ -36,10 +36,15 @@ router.get('/user', userController.index);
 router.get('/login', mainController.login);
 router.post('/login', mainController.login);
 router.get('/logout', mainController.logout);
-router.post('/user/delete/:id',userController.remove);
+router.post('/user/delete/:id', userController.remove);
+router.get('/dadosuser', mainController.updateUser);
+router.post('/user/update/:id', userController.update);
+router.get('/alterarsenha', mainController.renderChangePassword);
+router.post('/user/changepassword', userController.changePassword);
+
 // game
 router.post('/save-user-score/:score', mainController.userScore);
-router.get('/ranking',requireAuth, mainController.ranking);
+router.get('/ranking', requireAuth, mainController.ranking);
 
 // rotas de UUID
 router.get('/uuid', mainController.uuid);

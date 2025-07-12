@@ -47,11 +47,14 @@ function confirmDeletar(id, name) {
   document.getElementById('modal').style.display = 'flex';
 }
 
-function deletarUser(name) {
-  console.log("clicou em deletar userr")
-  document.getElementById('confirmationMessage').textContent =
-    `Deseja mesmo apagar o usuário ${name}?`;
-  document.getElementById('modal').style.display = 'flex';
+function deletarUser(userName, userId) {
+  const modal = document.getElementById('modal');
+  const message = document.getElementById('confirmationMessage');
+  const form = document.getElementById('deleteForm');
+
+  message.textContent = `Tem certeza que deseja deletar o usuário ${userName}?`;
+  form.action = `/user/delete/${userId}`;
+  modal.style.display = 'flex';
 }
 
 function closeModal() {

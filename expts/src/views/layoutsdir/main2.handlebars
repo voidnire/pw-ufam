@@ -10,11 +10,6 @@
       rel='stylesheet'
       href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'
     />
-
-  
-
-    <!--ADIÇÃO PRA LISTAGEM DE CURSOS-->
-
     <link
       href='https://getbootstrap.com/docs/5.3/assets/css/docs.css'
       rel='stylesheet'
@@ -37,8 +32,8 @@
   <body class='p-3 m-0 border-0 bd-example m-0 border-0'>
 
     <header>
-      <nav class='navbar navbar-expand-lg navbar-light bg-light'>
-        <a class='navbar-brand' href='/'>TrabalhoFinalPw</a>
+      <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
+        <a class='navbar-brand' href='/' style="margin-left: 10px;"> TrabalhoFinalPw</a>
         <button
           class='navbar-toggler'
           type='button'
@@ -50,7 +45,8 @@
         >
           <span class='navbar-toggler-icon'></span>
         </button>
-         {{#if isAuthenticated}}
+        
+                 {{#if isAuthenticated}}
         <div class='collapse navbar-collapse' id='navbarNavDropdown'>
           <ul class='navbar-nav'>
             <li class='nav-item active'>
@@ -93,16 +89,16 @@
                 aria-labelledby='navbarDropdownMenuLink'
               >
                 <a class='dropdown-item' href='/logout'>Efetuar Logout</a>
-                <a class='dropdown-item' href='/hb2'>Alterar dados cadastrais</a>
-                <a class='dropdown-item' href='/hb3'>Alterar senha</a>
+                <a class='dropdown-item' href='/dadosuser'>Alterar dados cadastrais</a>
+                <a class='dropdown-item' href='/alterarsenha'>Alterar senha</a>
               </div>
             </li>
-  </ul>
+           </ul>
 
             {{else}}
       
 
-            <ul class='navbar-nav '> 
+            <ul class='navbar-nav'> 
                     <li class='nav-item'>
                           <a class='nav-link' href='/sobre'>Sobre</a>
                 </li>
@@ -128,25 +124,26 @@
                 <a class='dropdown-item' href='/hb4'>HB4</a>
               </div>
             </li>
-</ul>
-<!--BOTÕES-->
+            </ul>
+            <!--BOTÕES-->
             <ul class='navbar-nav ms-auto'>
 
             <button
             type='button'
             class='btn btn-outline-success my-2 my-sm-0 ms-auto d-flex'
-            onclick="window.location.href='/cadastro';"
-          >
+            onclick="window.location.href='/cadastro';" style="margin-right: 10px;"
+            >
             Criar Conta
           </button>
           <button
             type='button'
             class='btn btn-outline-success my-2 my-sm-0 ms-auto d-flex'
-            onclick="window.location.href='/login';"
+            onclick="window.location.href='/login';" style="margin-right: 10px;"
           >
             Login
           </button>    
           </ul>   
+          
         </div>
       </nav>
       {{/if}}

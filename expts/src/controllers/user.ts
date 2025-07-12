@@ -5,9 +5,13 @@ import {
   getAllUsers,
   updateUser,
   getUserById,
-  getUserByEmail,removeGameSessions
+  getUserByEmail,
+  removeGameSessions,
 } from '../services/user';
 import { userSchema } from '../types/schema';
+import bcrypt from 'bcryptjs';
+
+import { UpdateUserDto } from '../types/user';
 
 import { getAllMajors, getMajor } from '../services/major';
 
@@ -103,40 +107,43 @@ const read = async (req: Request, res: Response) => {
 
 const update = async (req: Request, res: Response) => {
   const id = req.params.id;
+  const user = await getUserById(id);
 
-  if (req.method === 'GET') {
-    const user = await getUserById(id);
-    if (!user) {
-      res.status(404).send('User not found');
-      return;
+  if (!user) {
+    res.status(404).send('User not found');
+    return;
+  }
+  const majors = await getAllMajors();
+
+  if (req.method === 'POST') {
+    try {
+      const { name, email, password, majorId } = req.body;
+
+      const updateData: UpdateUserDto = {
+        name,
+        email,
+        password,
+        majorId,
+      };
+
+      await updateUser(id, updateData);
+
+      res.redirect('/user');
+    } catch (err) {
+      res.status(500).send(err);
+      res.status(500).send('Erro ao atualizar usuário');
     }
-    const majors = await getAllMajors();
-    res.render('user/update', { user, majors });
-    return;
-  }
-
-  const { error, value } = userSchema.validate(req.body);
-  if (error) {
-    res.status(400).send(error.details[0].message);
-    return;
-  }
-
-  try {
-    await updateUser(id, value);
-    res.redirect('/user');
-  } catch (err) {
-    res.status(500).send(err);
   }
 };
 
 const remove = async (req: Request, res: Response) => {
   const { id } = req.params;
-  console.log("Removendo as game sessions do usuário.", id)
+  console.log('Removendo as game sessions do usuário.', id);
 
-  removeGameSessions(id)
-  
-  console.log("Removendo o usuário de id:", id)
-  
+  removeGameSessions(id);
+
+  console.log('Removendo o usuário de id:', id);
+
   try {
     await removeUser(id);
     res.redirect('/user');
@@ -146,4 +153,57 @@ const remove = async (req: Request, res: Response) => {
   }
 };
 
-export default { create, remove, index, update, login };
+const changePassword = async (req: Request, res: Response) => {
+  const userId = req.cookies?.uid;
+  const { currentPassword, newPassword, repeatNewPassword } = req.body;
+
+  const user = await getUserById(userId);
+
+  if (!user) {
+    res.status(404).send('Usuário não encontrado');
+    return;
+  }
+
+  // Verifica se a senha atual está correta
+  const isMatch = await bcrypt.compare(currentPassword, user.password);
+  if (!isMatch) {
+    res
+      .status(400)
+      .render('alterarsenha', { error: 'Senha atual incorreta', user });
+    return;
+  }
+
+  // Verifica se nova senha e repetir nova senha são iguais
+  if (newPassword !== repeatNewPassword) {
+    res.status(400).render('alterarsenha', {
+      error: 'As novas senhas não coincidem',
+      user,
+    });
+    return;
+  }
+
+  // Atualiza a senha usando o service (que já criptografa)
+  try {
+    await updateUser(userId, { password: newPassword });
+
+    res.render('alterarsenha', {
+      success: 'Senha alterada com sucesso!',
+      user,
+    });
+  } catch (err) {
+    console.error('Erro ao atualizar senha:', err);
+
+    res
+      .status(500)
+      .render('alterarsenha', { error: 'Erro ao atualizar senha', user });
+  }
+};
+
+export default {
+  create,
+  remove,
+  index,
+  update,
+  changePassword,
+  login,
+};

@@ -1,0 +1,78 @@
+<div class='container mt-5'>
+  <div class='row justify-content-center'>
+    <div class='col-md-6'>
+      <div class='card'>
+        <div class='card-header bg-primary text-white'>
+          <h3 class='text-center'>Alterar Dados</h3>
+        </div>
+        <div class='card-body'>
+          {{#if error}}
+            <div class='alert alert-danger'>{{error}}</div>
+          {{/if}}
+          {{#if success}}
+            <div class='alert alert-success'>{{success}}</div>
+          {{/if}}
+
+          <form action='/user/update/{{user.id}}' method='POST'>
+            <div class='mb-3'>
+              <label for='name' class='form-label'>Nome</label>
+              <input
+                type='text'
+                class='form-control'
+                id='name'
+                name='name'
+                value='{{user.name}}'
+              />
+            </div>
+
+            <div class='mb-3'>
+              <label for='email' class='form-label'>Email</label>
+              <input
+                type='email'
+                class='form-control'
+                id='email'
+                name='email'
+                value='{{user.email}}'
+              />
+            </div>
+
+            <!-- <div class='mb-3'>
+                  <label for='confirmPassword' class='form-label'>Repetir Senha</label>
+                  <input
+                    type='password'
+                    class='form-control'
+                    id='confirmPassword'
+                    name='confirmPassword'
+                    required
+                  />
+                </div>-->
+
+            <div class='mb-3'>
+              <label for='majorId' class='form-label'>Curso</label>
+              <select class='form-select' id='majorId' name='majorId'>
+                <option value='' selected disabled>Selecione seu curso</option>
+                {{#each majors}}
+                  <option value='{{id}}'>{{name}}</option>
+                {{/each}}
+              </select>
+            </div>
+
+            <div class='d-grid gap-2'>
+              <button type='submit' class='btn btn-primary'>Salvar Alterações</button>
+            </div>
+            <div class='d-grid gap-2 mt-2'>
+              <button
+                type='button'
+                class='btn btn-secondary'
+                onclick='history.back()'
+              >
+                Voltar
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
